@@ -1,0 +1,1459 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta name="description" content="ECOTUR Teguise">
+    <title>ECO-TUR Teguise</title>
+    <!-- Favicons-->
+    <link rel="shortcut icon" href="vendor/panagea-1.1.0/img/favicon.ico" type="image/x-icon">
+    <link rel="apple-touch-icon" type="image/x-icon"
+          href="vendor/panagea-1.1.0/img/apple-touch-icon-57x57-precomposed.png">
+    <link rel="apple-touch-icon" type="image/x-icon" sizes="72x72"
+          href="vendor/panagea-1.1.0/img/apple-touch-icon-72x72-precomposed.png">
+    <link rel="apple-touch-icon" type="image/x-icon" sizes="114x114"
+          href="vendor/panagea-1.1.0/img/apple-touch-icon-114x114-precomposed.png">
+    <link rel="apple-touch-icon" type="image/x-icon" sizes="144x144"
+          href="vendor/panagea-1.1.0/img/apple-touch-icon-144x144-precomposed.png">
+    <!-- BASE CSS -->
+    <link href="vendor/panagea-1.1.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="vendor/panagea-1.1.0/css/style.css" rel="stylesheet">
+    <link href="vendor/panagea-1.1.0/css/vendors.css" rel="stylesheet">
+    <link href="vendor/panagea-1.1.0/css/icon_fonts/css/all_icons.min.css" rel="stylesheet">
+    <link href="vendor/animate.css-3.6.2/animate.min.css" rel="stylesheet">
+    <link href="vendor/dropzone/dropzone.css" rel="stylesheet">
+    <link href="vendor/swipebox-1.4.4/css/swipebox.min.css" rel="stylesheet">
+
+
+
+
+    <link href="vendor/lightslider-1.1.6/css/lightslider.min.css" rel="stylesheet">
+    <link href="vendor/lightgallery-1.6.12/css/lightgallery.min.css" rel="stylesheet">
+
+
+
+
+
+    <link href="vendor/fontawesome/css/all.min.css" rel="stylesheet">
+    <link href="vendor/swal/sweetalert2.min.css" rel="stylesheet">
+    <!-- YOUR CUSTOM CSS -->
+    <link rel="stylesheet" type="text/css" href="css/app.css">
+</head>
+<body>
+<div id="page" style="margin-bottom: 90px;">
+    <header class="header menu_fixed">
+        <div id="preloader">
+            <div data-loader="circle-side"></div>
+        </div>
+        <div id="logo">
+            <a href="#/">
+                <img src="img/logo_ecotur_sticky.png" width="220" height="69" data-retina="true" alt="ecoTUR teguise" class="logo_normal">
+                <img src="img/logo_ecotur_sticky.png" width="220" height="69" data-retina="true" alt="ecoTUR teguise" class="logo_sticky">
+            </a>
+        </div>
+        <ul id="top_menu">
+            <li id="li_back_to_page" style="margin-top: 4px; display: none;">
+                <span id="back_to_page" onclick="javascript:onBackKeyDown();" class="icon-left-big" style="cursor: pointer;"></span>
+            </li>
+        </ul>
+        <a href="#menu" class="btn_mobile">
+            <div class="hamburger hamburger--spin" id="hamburger">
+                <div class="hamburger-box">
+                    <div class="hamburger-inner"></div>
+                </div>
+            </div>
+        </a>
+        <nav id="menu" class="main-menu">
+            <ul>
+                <li><span><a id="mntxtini" href="#"><%= (idioma == 'en') ? 'Home' : 'Inicio' %></a></span></li>
+                <li><span><a id="mntxtsend" href="#senderos"><%= (idioma == 'en') ? 'Trails' : 'Senderos' %></a></span></li>
+                <li><span><a id="mntxtpi" href="#puntos"><%= (idioma == 'en') ? 'Points of interest' : 'Puntos de interés' %></a></span></li>
+                <li><span><a id="mntxtconsejos" href="#consejos"><%= (idioma == 'en') ? 'Hiking signs' : 'Señalética' %></a></span></li>
+                <li><span><a id="mntxtrecomend" href="#recomendaciones"><%= (idioma == 'en') ? 'Recommendations' : 'Recomendaciones' %></a></span></li>
+                <li><span><a id="mntxtacerca" href="#acerca"><%= (idioma == 'en') ? 'Ecotur Partners' : 'Ecotur - Socios' %></a></span></li>
+                <li><span><a id="mntxtper" href="#ficha"><%= (idioma == 'en') ? 'User profile' : 'Perfil de usuario' %></a></span></li>
+                <li id="li_sesion"><span id="mntxtout" style="cursor: pointer;"><%= (idioma == 'en') ? 'Logout' : 'Cerrar Sesión' %></span></li>
+            </ul>
+        </nav>
+    </header>
+    <main></main>
+    <div id="wraper_footer"></div>
+</div>
+<script type="text/template" id="detalle_content">
+    <section class="hero_in hotels_detail">
+        <div class="wrapper">
+            <div class="container">
+                <h1 class="fadeInUp"><span></span><%= (idioma == 'en') ? ruta_actual.nombre_en : ruta_actual.nombre_es %></h1>
+            </div>
+            <div>
+                <span class="magnific-gallery">
+					<a id="btn_iniciar_ruta" href="javascript:void(0);" class="btn_photos btn-bandera" title="Comenzar Ruta">
+                        <i class="icon-flag-checkered nav-icon"></i>
+                    </a>
+                </span>
+                <span class="magnific-gallery">
+                    <a href="javascript:void(0);" class="btn_pos btn_photos btn-posicion-actual" title="Posicion Actual">
+                        <i class="ti-target nav-icon"></i>
+                    </a>
+                </span>
+                <span class="magnific-gallery">
+                    <a href="javascript:void(0);" class="btn_photos btn-punto-interes" title="Punto de Interés">
+                        <i class="pe-7s-map-2 nav-icon"></i>
+                    </a>
+                </span>
+                <span class="magnific-gallery">
+                    <a id="bt_compartir" href="javascript:void(0);" class="icon-share btn_photos btn-share" title="Compartir"></a>
+                </span>
+                <span class="magnific-gallery">
+                    <a href="#tripadvisor" class="btn_photos btn-trip-advisor" title="Hoteles y Gastronomía">
+                        <i class="fab fa-tripadvisor nav-icon"></i>
+                    </a>
+                </span>
+            </div>
+        </div>
+    </section>
+    <div id="mapa" class="map map_single add_bottom_30"></div>
+    <div id="pis_wrapper"></div>
+    <div class="container margin_60_35 bg_color_1">
+        <div class="row">
+            <div id="weather_wrapper" class="col">
+                <%= (idioma == 'en') ? 'Looking for weather forecast...' : 'Buscando pronóstico de clima...' %>
+            </div>
+        </div>
+    </div>
+    <div class="bg_color_1">
+        <div class="container margin_60_35">
+            <div class="row">
+                <div class="col-lg-12">
+                    <section id="description">
+                        <h4><%= (idioma == 'en') ? 'Data Sheet' : 'Ficha Técnica' %></h4>
+                        <table class="table">
+                            <tbody>
+                            <tr>
+                                <th scope="row" class="icon-location-6"></th>
+                                <td><%= (idioma == 'en') ? 'Distance' : 'Distancia' %> KM:</td>
+                                <td class="ficha-resaltado"><%= ruta_actual.distancia %></td>
+                            </tr>
+                            <tr>
+                                <th scope="row" class="icon-progress-2"></th>
+                                <td><%= (idioma == 'en') ? 'Difficulty' : 'Dificultad' %>:</td>
+                                <td class="ficha-resaltado"><%= ruta_actual.dif_es %></td>
+                            </tr>
+                            <tr>
+                                <th scope="row" class="icon-flag-empty"></th>
+                                <td><%= (idioma == 'en') ? 'Checkpoints' : 'Checkpoints' %></td>
+                                <td class="ficha-resaltado"><%= ruta_actual.checkpoints %></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                        <div id="accordion">
+                            <div class="card card-descripcion card-descargar-mapa">
+                                <div class="card-header" id="headingOne">
+                                    <h5 class="mb-0">
+                                        <button class="btn btn-link collapsed btn-descargar-mapa" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                            <%= (idioma == 'en') ? 'Download Trail' : 'Descargar sendero' %>
+                                        </button>
+                                    </h5>
+                                </div>
+                                <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+                                    <div class="card-body">
+                                        <% if (ruta_actual.pdf) { %><a href="<%= BASE_URL + '/externos/descargar/' + ruta_actual.arch_pdf %>" class="mapa-link" target="_blank">PDF</a><% } %>
+                                        <% if (ruta_actual.kml) { %><a href="<%= BASE_URL + '/externos/descargar/' + ruta_actual.arch_kml %>" class="mapa-link" target="_blank">KML</a><% } %>
+                                        <% if (ruta_actual.gpx) { %><a href="<%= BASE_URL + '/externos/descargar/' + ruta_actual.arch_gpx %>" class="mapa-link" target="_blank">GPX</a><% } %>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <h4><%= (idioma == 'en') ? 'Description' : 'Descripción' %></h4>
+                        <div><%= (idioma == 'en') ? ruta_actual.desc_en : ruta_actual.desc_es %></div>
+                        <section id="tripadvisor">
+                            <div class="row text-center">
+                                <% if (ruta_actual.ta_dormir) { %>
+                                    <div class="col">
+                                        <a class="link-tripadvisor" href="<%= ruta_actual.ta_dormir %>" target="blank">
+                                            <h4 class="hotel-tripadvisor">
+                                                <i class="fab fa-tripadvisor"></i> <%= (idioma == 'en') ? 'Hotels' : 'Hoteles' %>
+                                            </h4>
+                                        </a>
+                                    </div>
+                                <% } %>
+                                <% if (ruta_actual.ta_comer) { %>
+                                    <div class="col">
+                                        <a class="link-tripadvisor" href="<%= ruta_actual.ta_comer %>" target="blank">
+                                            <h4 class="restaurante-tripadvisor">
+                                                <i class="fab fa-tripadvisor"></i> <%= (idioma == 'en') ? 'Restaurants' : 'Restaurantes' %>
+                                            </h4>
+                                        </a>
+                                    </div>
+                                <% } %>
+                            </div>
+                        </section>
+                        <div id="accordion">
+                            <div class="card card-descripcion">
+                                <div class="card-header" id="headingOne">
+                                    <h5 class="mb-0">
+                                        <button class="btn btn-link collapsed bt_accorden" data-toggle="collapse" data-target="#collapseFlora" aria-expanded="true" aria-controls="collapseFlora">
+                                            <%= (idioma == 'en') ? 'Wildlife and Vegetation' : 'Fauna y Vegetación' %> >
+                                        </button>
+                                    </h5>
+                                </div>
+                                <div id="collapseFlora" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+                                    <div class="card-body">
+                                        <%= (idioma == 'en') ? ruta_actual.florafauna_en : ruta_actual.florafauna_es %>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card">
+                                <div class="card-header" id="headingTwo">
+                                    <h5 class="mb-0">
+                                        <button class="btn btn-link collapsed bt_accorden" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                            <%= (idioma == 'en') ? 'History and Heritage' : 'Historia y Patrimonio' %> >
+                                        </button>
+                                    </h5>
+                                </div>
+                                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
+                                    <div class="card-body">
+                                        <%= (idioma == 'en') ? ruta_actual.historia_en : ruta_actual.historia_es %>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <% if (ruta_actual.galeria.length > 0) { %>
+                            <h4 class="h_tit_gal"><%= (idioma == 'en') ? 'Image gallery' : 'Galería de Imágenes' %></h4>
+                            <div class="container-fluid">
+                                <ul id="imagegallery">
+                                    <% _.each(ruta_actual.galeria, function(img) { %>
+                                        <li data-thumb="<%= BASE_URL+'/cdn/uploads/' + img.path_source %>" data-src="<%= BASE_URL+'/cdn/uploads/' + img.path_source %>">
+                                            <img style="height: 220px; width: 100%;" src="<%= BASE_URL+'/cdn/uploads/' + img.path_source %>" />
+                                        </li>
+                                    <% }) %>
+                                </ul>
+                            </div>
+                        <% } %>
+                        <% if (ruta_actual.compartidas.length > 0) { %>
+                            <h4 class="h_tit_gal"><%= (idioma == 'en') ? 'Images of Users' : 'Imágenes de Usuarios' %></h4>
+                            <div class="container-fluid">
+                                <ul id="wrapper_compartidas">
+                                    <% _.each(ruta_actual.compartidas, function(img) { %>
+                                        <li data-thumb="<%= BASE_URL+'/cdn/uploads/' + img.path_source %>" data-src="<%= BASE_URL+'/cdn/uploads/' + img.path_source %>">
+                                            <img style="height: 220px; width: 100%;" src="<%= BASE_URL+'/cdn/uploads/' + img.path_source %>" />
+                                        </li>
+                                    <% }) %>
+                                </ul>
+                            </div>
+                        <% } %>
+                    </section>
+                </div>
+            </div>
+        </div>
+    </div>
+</script>
+<script type="text/template" id="detalle_reducida">
+    <section class="hero_in hotels_detail">
+        <div class="wrapper">
+            <div class="container">
+                <h1 class="fadeInUp"><span></span><%= (idioma == 'en') ? ruta_actual.nombre_en : ruta_actual.nombre_es %></h1>
+            </div>
+            <div>
+                <span class="magnific-gallery">
+					<a href="javascript:void(0);" class="btn_photos btn-bandera tr50" title="Comenzar Ruta">
+                        <i class="icon-flag-checkered nav-icon"></i>
+                    </a>
+                </span>
+                <span class="magnific-gallery">
+                    <a href="javascript:void(0);" class="btn_pos btn_photos btn-posicion-actual" title="Posicion Actual">
+                        <i class="ti-target nav-icon"></i>
+                    </a>
+                </span>
+                <span class="magnific-gallery">
+                    <a href="javascript:void(0);" class="btn_photos btn-punto-interes" title="Punto de Interés">
+                        <i class="pe-7s-map-2 nav-icon"></i>
+                    </a>
+                </span>
+                <span class="magnific-gallery">
+                    <a id="bt_compartir" href="javascript:void(0);" class="icon-share btn_photos btn-share" title="Compartir"></a>
+                </span>
+                <span class="magnific-gallery">
+                    <a href="#tripadvisor" class="btn_photos btn-trip-advisor" title="Hoteles y Gastronomía">
+                        <i class="fab fa-tripadvisor nav-icon"></i>
+                    </a>
+                </span>
+            </div>
+        </div>
+    </section>
+    <div id="mapa" class="map map_single add_bottom_30"></div>
+    <div id="pis_wrapper"></div>
+    <div class="container margin_60_35 bg_color_1">
+        <div class="row">
+            <div id="weather_wrapper" class="col"><%= (idioma == 'en') ? 'Looking for weather forecast...' : 'Buscando pronóstico de clima...' %></div>
+        </div>
+    </div>
+    <div class="bg_color_1">
+        <div class="container margin_60_35">
+            <div class="row">
+                <div class="col-lg-12">
+                    <section id="description">
+                        <h4><%= (idioma == 'en') ? 'Description' : 'Descripción' %></h4>
+                        <div><%= (idioma == 'en') ? ruta_actual.desc_en : ruta_actual.desc_es %></div>
+                        <section id="tripadvisor">
+                            <div class="row text-center">
+                                <% if (ruta_actual.ta_dormir) { %>
+                                    <div class="col">
+                                        <a class="link-tripadvisor" href="<%= ruta_actual.ta_dormir %>" target="blank">
+                                            <h4 class="hotel-tripadvisor">
+                                                <i class="fab fa-tripadvisor"></i> <%= (idioma == 'en') ? 'Hotels' : 'Hoteles' %>
+                                            </h4>
+                                        </a>
+                                    </div>
+                                <% } %>
+                                <% if (ruta_actual.ta_comer) { %>
+                                    <div class="col">
+                                        <a class="link-tripadvisor" href="<%= ruta_actual.ta_comer %>" target="blank">
+                                            <h4 class="restaurante-tripadvisor">
+                                                <i class="fab fa-tripadvisor"></i> <%= (idioma == 'en') ? 'Restaurants' : 'Restaurantes' %>
+                                            </h4>
+                                        </a>
+                                    </div>
+                                <% } %>
+                            </div>
+                        </section>
+                        <% if (ruta_actual.galeria.length > 0) { %>
+                            <h4 class="h_tit_gal"><%= (idioma == 'en') ? 'Image gallery' : 'Galería de Imágenes' %></h4>
+                            <div class="container-fluid">
+                                <ul id="imagegallery">
+                                    <% _.each(ruta_actual.galeria, function(img) { %>
+                                    <li data-thumb="<%= BASE_URL+'/cdn/uploads/' + img.path_source %>" data-src="<%= BASE_URL+'/cdn/uploads/' + img.path_source %>">
+                                        <img style="height: 220px; width: 100%;" src="<%= BASE_URL+'/cdn/uploads/' + img.path_source %>" />
+                                    </li>
+                                    <% }) %>
+                                </ul>
+                            </div>
+                        <% } %>
+                        <% if (ruta_actual.compartidas.length > 0) { %>
+                            <h4 class="h_tit_gal"><%= (idioma == 'en') ? 'Images of Users' : 'Imágenes de Usuarios' %></h4>
+                            <div class="container-fluid">
+                                <ul id="wrapper_compartidas">
+                                    <% _.each(ruta_actual.compartidas, function(img) { %>
+                                    <li data-thumb="<%= BASE_URL+'/cdn/uploads/' + img.path_source %>" data-src="<%= BASE_URL+'/cdn/uploads/' + img.path_source %>">
+                                        <img style="height: 220px; width: 100%;" src="<%= BASE_URL+'/cdn/uploads/' + img.path_source %>" />
+                                    </li>
+                                    <% }) %>
+                                </ul>
+                            </div>
+                        <% } %>
+                    </section>
+                </div>
+            </div>
+        </div>
+    </div>
+</script>
+<script type="text/template" id="perfil_wrapper">
+    <section class="hero_in general-perfil">
+        <div class="wrapper">
+            <div id="perfil_cotent_wrapper" class="container"></div>
+        </div>
+    </section>
+</script>
+<script type="text/template" id="perfil_content">
+    <div class="circular-portrait-container">
+        <div class="circular-portrait">
+            <img src="<%= (!avatar) ? 'img/demo/avatar_default.jpg' : BASE_URL + '/cdn/uploads/' + avatar %>" alt="Image">
+        </div>
+        <div class="img-circle globo-edit_profile">
+            <span onclick="javascript: ir('#ficha');" class="icon-pencil-3"></span>
+        </div>
+    </div>
+    <h2 class="fadeInUp perfil"><span></span><%= name %></h2>
+    <span class="bajada"><%= getPais(pais) %></span>
+</script>
+<script type="text/template" id="fav_content">
+    <% if (usuario.liked.length > 0) { %>
+        <div class="container" style="background-color: #ffffff;">
+            <span style="font-size: 0.75rem; font-weight: 600; margin-top: 10px; margin-bottom: 10px; display: inline-block;"><%= (idioma == 'en') ? 'Favorite Trails' : 'Rutas Favoritas' %></span>
+            <div class="wrapper-grid">
+                <div id="lista-favoritas" class="row">
+                    <% _.each(usuario.liked, function(item){ %>
+                        <% var ra = rutas.find({'id': parseInt(item.ruta_id)}); ra = ra.attributes; %>
+                        <div class="box_grid">
+                            <% if (ra.archivo != null) { %>
+                                <figure>
+                                    <a href="#/rutas/<%= ra.id %>">
+                                        <img src="<%= BASE_URL + '/cdn/uploads/' + ra.archivo.path_source %>" class="img-fluid" alt="" width="800">
+                                    </a>
+                                </figure>
+                            <% } %>
+                            <div class="wrapper-actividad">
+                                <h3><a href="#/rutas/<%= ra.id %>"><%= (idioma == 'en') ? ra.nombre_en : ra.nombre_es %></a></h3>
+                            </div>
+                        </div>
+                    <% }) %>
+                </div>
+            </div>
+        </div>
+    <% } %>
+</script>
+<script type="text/template" id="favorita">
+    <div class="box_grid">
+        <% if (archivo != null) { %>
+            <figure>
+                <a href="#/rutas/<%= id %>">
+                    <img src="<%= BASE_URL + '/cdn/uploads/' + archivo.path_source %>" class="img-fluid" alt="" width="800">
+                </a>
+            </figure>
+        <% } %>
+        <div class="wrapper-actividad">
+            <h3><a href="#/rutas/<%= id %>"><%= (idioma == 'en') ? nombre_en : nombre_es %></a></h3>
+        </div>
+    </div>
+</script>
+<script type="text/template" id="perfil_imagenes">
+    <% if (usuario.images.length > 0) { %>
+        <div class="container" style="background-color: #ffffff;">
+            <span style="font-size: 0.75rem; font-weight: 600; margin-top: 10px; margin-bottom: 10px; display: inline-block;"><%= (idioma == 'en') ? 'Images' : 'Imágenes' %></span>
+            <div class="container-fluid">
+                <ul id="wrapper_subidas">
+                    <% _.each(usuario.images, function(item) { %>
+                        <li data-thumb="<%= BASE_URL+'/cdn/uploads/' + item.path_source %>" data-src="<%= BASE_URL+'/cdn/uploads/' + item.path_source %>">
+                            <div data-image_id="<%= item.id %>" class="btn_delete_image img-circle globo-cancel">
+                                <span class="icon-cancel"></span>
+                            </div>
+                            <img style="height: 220px; width: 100%;" src="<%= BASE_URL+'/cdn/uploads/' + item.path_source %>" />
+                        </li>
+                    <% }) %>
+                </ul>
+            </div>
+        </div>
+    <% } %>
+</script>
+<script type="text/template" id="ruta">
+    <div class="box_grid">
+        <figure>
+            <a id="like_<%= id %>" href="javascript:void(0);" class="wish_bt" data-ruta_id="<%= id %>"></a>
+            <% if (archivo != null) { %>
+                <a href="#/rutas/<%= id %>">
+                    <img src="<%= BASE_URL+'/cdn/uploads/' + archivo.path_source %>" class="img-fluid" width="800" alt="">
+                </a>
+            <% } %>
+            <small><%= (idioma == 'en') ? nombre_en : nombre_es %></small>
+        </figure>
+        <div class="wrapper">
+            <h3><a href="#/rutas/<%= id %>"><%= (idioma == 'en') ? nombre_en : nombre_es %></a></h3>
+            <div class="rating">
+                <% if (valoracion_total != null) { %>
+                    <%= restrellitas(null, valoracion_total, valoracion_cantidad) %>
+                    <span class="price"><%= valor_ruta(valoracion_total, valoracion_cantidad) %>/5 <span class="distancia"><%= (idioma == 'en') ? 'Distance' : 'Distancia' %> <%= distancia %> KM</span></span>
+                <% } else { %>
+                    <span style="font-weight: 500; color: #999;"><%= (idioma == 'en') ? 'Distance' : 'Distancia' %> <%= distancia %> KM</span>
+                <% } %>
+            </div>
+        </div>
+    </div>
+</script>
+<script type="text/template" id="rutas">
+    <div class="container margin_60_35">
+        <div id="wrapper-rutas" class="wrapper-grid">
+            <button id="recargar" type="button" class="btn-link rounded">
+                <i class="icon-spin6 animate-spin"></i>
+            </button>
+            <div id="lista-rutas" class="row"></div>
+        </div>
+    </div>
+</script>
+<script type="text/template" id="tpl_footer">
+    <footer>
+        <div id="container-none" class="margin_60_35 fixed-bottom menu-bottom">
+            <div class="row">
+                <div class="col">
+                    <a id="btn_senderos" href="javascript:void(0);">
+                        <i class="pe-7s-way footer-icon"></i>
+                        <br />
+                        <span class="bajada-icono"><%= (idioma == 'en') ? 'Trails' : 'Senderos' %></span>
+                    </a>
+                </div>
+                <div class="col">
+                    <a id="btn_puntos" href="javascript:void(0);">
+                        <i class="pe-7s-map-2 footer-icon"></i>
+                        <br />
+                        <span id="pdi" class="bajada-icono"><%= (idioma == 'en') ? 'P.O.I.' : 'P.D.I.' %></span>
+                    </a>
+                </div>
+                <div class="col">
+                    <a id="btn_perfil" href="javascript:void(0);">
+                        <i class="pe-7s-user footer-icon"></i>
+                        <br />
+                        <span class="bajada-icono"><%= (idioma == 'en') ? 'Profile' : 'Perfil' %></span>
+                    </a>
+                </div>
+                <div class="col">
+                    <a id="btn_clima" href="javascript:void(0);">
+                        <i class="pe-7s-sun footer-icon"></i>
+                        <br />
+                        <span class="bajada-icono"><%= (idioma == 'en') ? 'Wheather' : 'Clima' %></span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+</script>
+<script type="text/template" id="tpl_inicio">
+    <section class="hero_in bienvenido">
+        <div class="wrapper">
+            <div class="container">
+                <h1 class="fadeInUp"><span></span><%= (idioma == 'en') ? 'Welcome to' : 'Bienvenido a' %><br />Teguise</h1>
+            </div>
+        </div>
+    </section>
+    <div class="bg_color_1">
+        <div class="container margin_80_55">
+            <div class="main_title_2">
+                <span><em></em></span>
+                <h3><%= (idioma == 'en') ? 'From the Sea to the River' : 'Del Mar al Río' %></h3>
+                <p><%= (idioma == 'en') ? 'From' : 'De' %> Costa Teguise <%= (idioma == 'en') ? 'to' : 'a' %> La Graciosa</p>
+            </div>
+            <div class="isotope-wrapper">
+                <div class="row" style="display: inline-block; text-align: center; width: 100%;">
+                    <div class="col-lg-6 isotope-item bienvenido-container" style="display: inline-block;">
+                        <p class="bienvenido-texto"><%= (idioma == 'en') ? 'A route that ascends geographically from east to northwest crossing the municipality of Teguise, where we can enjoy significant enclaves, unique landscapes and unique history. The ethnography linked to a dry land with farmhouses and cisterns dotted in the rocky plains of Guasia. Teseguite a village nestled in argillaceous land, where agriculture marks part of its corners. The climb to the Guanapay volcano is the highest point of the route and the natural viewpoint from which to extend the insular horizon. Teguise, the ancient capital of the island, shows us its antiquity in an artistic and historical group of great beauty. The arrival to the majestic beach of Famara with the Risco in engraved in our retina and that will accompany us by the sea until the arrival to the eighth island, La Graciosa.' : '	Un recorrido que asciende geográficamente de este a noroeste atravesando el municipio de Teguise, donde podemos disfrutar de enclaves significativos, paisajes únicos e historia singular. La etnografía vinculada a una tierra seca con cortijos y aljibes salpicados en las llanuras pedregosas de Guasia. Teseguite un pueblo enclavado en tierra arcillosa, donde la agricultura marca parte de sus rincones. La subida al volcán de Guanapay es el punto más alto de la ruta y un excelente mirador natural. Teguise, la antigua capital de la isla, nos muestra su antigüedad en un conjunto histórico artístico de gran belleza. La llegada a la majestuosa playa de Famara con el Risco grabado en nuestra retina y que nos va a acompañar por el mar hasta la llegada a la octava isla, La Graciosa.' %></p>
+                        <table class="table">
+                            <tbody>
+                                <tr>
+                                    <th scope="row" class="icon-location-6"></th>
+                                    <td><%= (idioma == 'en') ? 'Distance' : 'Distancia' %> KM:</td>
+                                    <td class="ficha-resaltado">26</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row" class="icon-progress-2"></th>
+                                    <td><%= (idioma == 'en') ? 'Difficulty' : 'Dificultad' %>:</td>
+                                    <td class="ficha-resaltado"><%= (idioma == 'en') ? 'Easy' : 'Fácil' %></td>
+                                </tr>
+                                <tr>
+                                    <th scope="row" class="icon-flag-empty"></th>
+                                    <td><%= (idioma == 'en') ? 'Checkpoints' : 'Checkpoints' %></td>
+                                    <td class="ficha-resaltado">50</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <img src="img/inicio_distancias.jpg" style="width: 100%;">
+                        <div class="text-center">
+                            <a class="btn btn-link btn-recorrer" href="#senderos"><%= (idioma == 'en') ? 'Walking trails' : 'Recorrer senderos' %></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</script>
+<script type="text/template" id="tpl_clima">
+    <section class="hero_in clima">
+        <div class="wrapper">
+            <div class="container">
+                <h1 class="fadeInUp"><span></span><%= (idioma == 'en') ? 'Wheather in' : 'Meteo en' %><br />Teguise</h1>
+            </div>
+        </div>
+    </section>
+    <div class="bg_color_1">
+        <div class="container margin_80_55">
+            <div class="main_title_2">
+                <span><em></em></span>
+                <br />
+                <p><%= (idioma == 'en') ? 'Check the weather forecast for your activities' : 'Consulta la previsión metereológica para realizar tus actividades' %></p>
+            </div>
+            <div class="isotope-wrapper">
+                <div class="row" style="display: inline-block; text-align: center; width: 100%;">
+                    <div class="col-lg-6 isotope-item bienvenido-container" style="display: inline-block;">
+                        <div class="col-lg-12">
+                            <div id="wg_fwdg_586104_3_1557942950747"></div>
+                        </div>
+                        <div id="accordionViento">
+                            <div class="card">
+                                <div class="card-header" id="headingTwoViento">
+                                    <h5 class="mb-0">
+                                        <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseTwoViento" aria-expanded="false" aria-controls="collapseTwoViento">
+                                            <%= (idioma == 'en') ? 'Wind' : 'Viento' %> >
+                                        </button>
+                                    </h5>
+                                </div>
+                                <div id="collapseTwoViento" class="collapse" aria-labelledby="headingTwoViento" data-parent="#accordionViento">
+                                    <div class="card-body">
+                                        <div id="wg_fwdg_586104_3_1552335603653"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="accordionOlas">
+                            <div class="card">
+                                <div class="card-header" id="headingThreeOlas">
+                                    <h5 class="mb-0">
+                                        <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseThreeOlas" aria-expanded="false" aria-controls="collapseThreeOlas">
+                                            <%= (idioma == 'en') ? 'Waves' : 'Olas' %> >
+                                        </button>
+                                    </h5>
+                                </div>
+                                <div id="collapseThreeOlas" class="collapse" aria-labelledby="headingThreeOlas" data-parent="#accordionOlas">
+                                    <div class="card-body">
+                                        <div id="wg_fwdg_586104_25_1552335685546"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</script>
+<script type="text/template" id="tpl_senderos">
+    <section class="hero_in general">
+        <div class="wrapper">
+            <div class="container">
+                <h1 class="fadeInUp"><span></span><%= (idioma == 'en') ? 'Discover' : 'Senderos' %></h1>
+            </div>
+        </div>
+    </section>
+    <div class="filters_listing sticky_horizontal">
+        <div class="container">
+            <ul class="clearfix">
+                <li>
+                    <div class="switch-field">
+                        <input type="radio" id="all" name="listing_filter" value="all">
+                        <label for="all"><%= (idioma == 'en') ? 'Walking Trails' : 'Senderos Turísticos' %></label>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="collapse" id="collapseMap">
+        <div id="map" class="map"></div>
+    </div>
+</script>
+<script type="text/template" id="tpl_login">
+    <div id="login">
+        <aside>
+            <figure>
+                <a href="index.html">
+                    <img src="img/logo_ecotur_sticky.png" width="155" height="36" data-retina="true" alt="ecoTUR teguise" class="logo_sticky">
+                </a>
+            </figure>
+            <form>
+                <h3 class="titulo-bienvenida"><%= (idioma == 'en') ? 'Welcome' : '¡Bienvenido!' %></h3>
+                <p><%= (idioma == 'en') ? 'Log in and enjoy the beauty of Teguise' : 'Logueate y disfruta de las rutas de Teguise' %></p>
+                <div class="form-group">
+                    <label><%= (idioma == 'en') ? 'Email' : 'Email' %></label>
+                    <input type="email" class="form-control" name="email" id="email">
+                    <i class="icon_mail_alt"></i>
+                </div>
+                <div class="form-group">
+                    <label><%= (idioma == 'en') ? 'Password' : 'Contraseña' %></label>
+                    <input type="password" class="form-control" name="password" id="password" value="">
+                    <i class="icon_lock_alt"></i>
+                </div>
+                <div class="clearfix add_bottom_30">
+                    <div class="checkboxes float-left">
+                        <label class="container_check"><%= (idioma == 'en') ? 'Remember Me' : 'Recordar' %>
+                            <input type="checkbox">
+                            <span class="checkmark"></span>
+                        </label>
+                    </div>
+                    <div class="float-right mt-1"><a id="forgot" href="javascript:void(0);"><%= (idioma == 'en') ? 'Forgot Password' : '¿Olvidaste la contraseña?' %></a></div>
+                </div>
+                <a id="btn_login" class="btn_1 rounded full-width">
+                    <%= (idioma == 'en') ? 'Log In' : 'Iniciar Sesión' %>
+                </a>
+                <a id="btnLogFB" href="javascript:void(0);" class="social_bt facebook">
+                    <%= (idioma == 'en') ? 'Login with' : 'Ingresar con' %> Facebook
+                </a>
+                <div class="text-center add_top_10">
+                    <%= (idioma == 'en') ? 'New to ECO-TUR?' : '¿Eres nuevo en ECO-TUR?' %> <strong><a class="registrate" href="#registro"><%= (idioma == 'en') ? 'Sign Up' : 'Registrate' %>!</a></strong>
+                </div>
+            </form>
+            <div class="copy">© 2020 ECO-TUR|Teguise</div>
+        </aside>
+    </div>
+</script>
+<script type="text/template" id="tpl_registro">
+    <div id="register">
+        <aside>
+            <figure>
+                <a href="index.html">
+                    <img src="img/logo_ecotur_sticky.png" width="155" height="36" data-retina="true" alt="ecoTUR teguise" class="logo_sticky">
+                </a>
+            </figure>
+            <form autocomplete="off">
+                <div class="form-group">
+                    <label><%= (idioma == 'en') ? 'First Name' : 'Nombre' %></label>
+                    <input class="form-control" type="text" id="npt_nombre" name="nombre">
+                    <i class="ti-user"></i>
+                </div>
+                <div class="form-group">
+                    <label><%= (idioma == 'en') ? 'Last Name' : 'Apellido' %></label>
+                    <input class="form-control" type="text" id="npt_apellido" name="apellido">
+                    <i class="ti-user"></i>
+                </div>
+                <div class="form-group">
+                    <label><%= (idioma == 'en') ? 'Email' : 'Email' %></label>
+                    <input class="form-control" type="email" id="npt_email" name="email">
+                    <i class="icon_mail_alt"></i>
+                </div>
+                <div class="form-group">
+                    <label><%= (idioma == 'en') ? 'Password' : 'Contraseña' %></label>
+                    <input class="form-control" type="password" id="npt_password1" name="password">
+                    <i class="icon_lock_alt"></i>
+                </div>
+                <div class="form-group">
+                    <label><%= (idioma == 'en') ? 'Confirm Password' : 'Confirmar contraseña' %></label>
+                    <input class="form-control" type="password" id="npt_password2" name="password2">
+                    <i class="icon_lock_alt"></i>
+                </div>
+                <div id="pass-info" class="clearfix"></div>
+                <a id="btn_registro" class="btn_1 rounded full-width add_top_30">
+                    ¡<%= (idioma == 'en') ? 'Sign Up Now' : 'Registrarse Ahora' %>!</a>
+                <div class="text-center add_top_10">
+                    ¿Ya tienes una cuenta? <strong><a class="login" href="#"><%= (idioma == 'en') ? 'Log In' : 'Inicia Sesión' %></a></strong>
+                </div>
+            </form>
+            <div class="copy">© 2020 ECO-TUR|Teguise</div>
+        </aside>
+    </div>
+</script>
+<script type="text/template" id="tpl_ficha">
+    <div id="wrapper_ficha">
+        <div class="bg_color_1">
+            <div class="container margin_60_35">
+                <div style="width: 100%; text-align: center; margin-top: 15px; margin-bottom: 35px;">
+                    <div class="circular-portrait-container">
+                        <div class="circular-portrait">
+                            <img id="peperto" style="cursor: pointer;" src="<%= (!usuario.avatar) ? 'img/demo/avatar_default.jpg' : BASE_URL + '/cdn/uploads/'+usuario.avatar %>" alt="Image">
+                        </div>
+                        <div class="img-circle globo-edit">
+                            <span class="icon-pencil-3"></span>
+                        </div>
+                        <div class="subiendo">
+                            <i class="icon-spin3 animate-spin"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label><%= (idioma == 'en') ? 'Full name' : 'Nombre completo' %></label>
+                                <input type="text" class="form-control" id="nombre_completo" name="nombre_completo" value="<%= usuario.name %>">
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label><%= (idioma == 'en') ? 'Country of residence' : 'País de residencia' %></label>
+                                <div class="selector">
+                                    <select class="wide add_bottom_15" name="pais" id="pais">
+                                        <option value="AF">Afganistán</option>
+                                        <option value="AL">Albania</option>
+                                        <option value="DE">Alemania</option>
+                                        <option value="AD">Andorra</option>
+                                        <option value="AO">Angola</option>
+                                        <option value="AI">Anguilla</option>
+                                        <option value="AQ">Antártida</option>
+                                        <option value="AG">Antigua y Barbuda</option>
+                                        <option value="AN">Antillas Holandesas</option>
+                                        <option value="SA">Arabia Saudí</option>
+                                        <option value="DZ">Argelia</option>
+                                        <option value="AR">Argentina</option>
+                                        <option value="AM">Armenia</option>
+                                        <option value="AW">Aruba</option>
+                                        <option value="AU">Australia</option>
+                                        <option value="AT">Austria</option>
+                                        <option value="AZ">Azerbaiyán</option>
+                                        <option value="BS">Bahamas</option>
+                                        <option value="BH">Bahrein</option>
+                                        <option value="BD">Bangladesh</option>
+                                        <option value="BB">Barbados</option>
+                                        <option value="BE">Bélgica</option>
+                                        <option value="BZ">Belice</option>
+                                        <option value="BJ">Benin</option>
+                                        <option value="BM">Bermudas</option>
+                                        <option value="BY">Bielorrusia</option>
+                                        <option value="MM">Birmania</option>
+                                        <option value="BO">Bolivia</option>
+                                        <option value="BA">Bosnia y Herzegovina</option>
+                                        <option value="BW">Botswana</option>
+                                        <option value="BR">Brasil</option>
+                                        <option value="BN">Brunei</option>
+                                        <option value="BG">Bulgaria</option>
+                                        <option value="BF">Burkina Faso</option>
+                                        <option value="BI">Burundi</option>
+                                        <option value="BT">Bután</option>
+                                        <option value="CV">Cabo Verde</option>
+                                        <option value="KH">Camboya</option>
+                                        <option value="CM">Camerún</option>
+                                        <option value="CA">Canadá</option>
+                                        <option value="TD">Chad</option>
+                                        <option value="CL">Chile</option>
+                                        <option value="CN">China</option>
+                                        <option value="CY">Chipre</option>
+                                        <option value="VA">Ciudad del Vaticano (Santa Sede)</option>
+                                        <option value="CO">Colombia</option>
+                                        <option value="KM">Comores</option>
+                                        <option value="CG">Congo</option>
+                                        <option value="CD">Congo, República Democrática del</option>
+                                        <option value="KR">Corea</option>
+                                        <option value="KP">Corea del Norte</option>
+                                        <option value="CI">Costa de Marfíl</option>
+                                        <option value="CR">Costa Rica</option>
+                                        <option value="HR">Croacia (Hrvatska)</option>
+                                        <option value="CU">Cuba</option>
+                                        <option value="DK">Dinamarca</option>
+                                        <option value="DJ">Djibouti</option>
+                                        <option value="DM">Dominica</option>
+                                        <option value="EC">Ecuador</option>
+                                        <option value="EG">Egipto</option>
+                                        <option value="SV">El Salvador</option>
+                                        <option value="AE">Emiratos Árabes Unidos</option>
+                                        <option value="ER">Eritrea</option>
+                                        <option value="SI">Eslovenia</option>
+                                        <option value="ES" selected>España</option>
+                                        <option value="US">Estados Unidos</option>
+                                        <option value="EE">Estonia</option>
+                                        <option value="ET">Etiopía</option>
+                                        <option value="FJ">Fiji</option>
+                                        <option value="PH">Filipinas</option>
+                                        <option value="FI">Finlandia</option>
+                                        <option value="FR">Francia</option>
+                                        <option value="GA">Gabón</option>
+                                        <option value="GM">Gambia</option>
+                                        <option value="GE">Georgia</option>
+                                        <option value="GH">Ghana</option>
+                                        <option value="GI">Gibraltar</option>
+                                        <option value="GD">Granada</option>
+                                        <option value="GR">Grecia</option>
+                                        <option value="GL">Groenlandia</option>
+                                        <option value="GP">Guadalupe</option>
+                                        <option value="GU">Guam</option>
+                                        <option value="GT">Guatemala</option>
+                                        <option value="GY">Guayana</option>
+                                        <option value="GF">Guayana Francesa</option>
+                                        <option value="GN">Guinea</option>
+                                        <option value="GQ">Guinea Ecuatorial</option>
+                                        <option value="GW">Guinea-Bissau</option>
+                                        <option value="HT">Haití</option>
+                                        <option value="HN">Honduras</option>
+                                        <option value="HU">Hungría</option>
+                                        <option value="IN">India</option>
+                                        <option value="ID">Indonesia</option>
+                                        <option value="IQ">Irak</option>
+                                        <option value="IR">Irán</option>
+                                        <option value="IE">Irlanda</option>
+                                        <option value="BV">Isla Bouvet</option>
+                                        <option value="CX">Isla de Christmas</option>
+                                        <option value="IS">Islandia</option>
+                                        <option value="KY">Islas Caimán</option>
+                                        <option value="CK">Islas Cook</option>
+                                        <option value="CC">Islas de Cocos o Keeling</option>
+                                        <option value="FO">Islas Faroe</option>
+                                        <option value="HM">Islas Heard y McDonald</option>
+                                        <option value="FK">Islas Malvinas</option>
+                                        <option value="MP">Islas Marianas del Norte</option>
+                                        <option value="MH">Islas Marshall</option>
+                                        <option value="UM">Islas menores de Estados Unidos</option>
+                                        <option value="PW">Islas Palau</option>
+                                        <option value="SB">Islas Salomón</option>
+                                        <option value="SJ">Islas Svalbard y Jan Mayen</option>
+                                        <option value="TK">Islas Tokelau</option>
+                                        <option value="TC">Islas Turks y Caicos</option>
+                                        <option value="VI">Islas Vírgenes (EEUU)</option>
+                                        <option value="VG">Islas Vírgenes (Reino Unido)</option>
+                                        <option value="WF">Islas Wallis y Futuna</option>
+                                        <option value="IL">Israel</option>
+                                        <option value="IT">Italia</option>
+                                        <option value="JM">Jamaica</option>
+                                        <option value="JP">Japón</option>
+                                        <option value="JO">Jordania</option>
+                                        <option value="KZ">Kazajistán</option>
+                                        <option value="KE">Kenia</option>
+                                        <option value="KG">Kirguizistán</option>
+                                        <option value="KI">Kiribati</option>
+                                        <option value="KW">Kuwait</option>
+                                        <option value="LA">Laos</option>
+                                        <option value="LS">Lesotho</option>
+                                        <option value="LV">Letonia</option>
+                                        <option value="LB">Líbano</option>
+                                        <option value="LR">Liberia</option>
+                                        <option value="LY">Libia</option>
+                                        <option value="LI">Liechtenstein</option>
+                                        <option value="LT">Lituania</option>
+                                        <option value="LU">Luxemburgo</option>
+                                        <option value="MK">Macedonia, Ex-República Yugoslava de</option>
+                                        <option value="MG">Madagascar</option>
+                                        <option value="MY">Malasia</option>
+                                        <option value="MW">Malawi</option>
+                                        <option value="MV">Maldivas</option>
+                                        <option value="ML">Malí</option>
+                                        <option value="MT">Malta</option>
+                                        <option value="MA">Marruecos</option>
+                                        <option value="MQ">Martinica</option>
+                                        <option value="MU">Mauricio</option>
+                                        <option value="MR">Mauritania</option>
+                                        <option value="YT">Mayotte</option>
+                                        <option value="MX">México</option>
+                                        <option value="FM">Micronesia</option>
+                                        <option value="MD">Moldavia</option>
+                                        <option value="MC">Mónaco</option>
+                                        <option value="MN">Mongolia</option>
+                                        <option value="MS">Montserrat</option>
+                                        <option value="MZ">Mozambique</option>
+                                        <option value="NA">Namibia</option>
+                                        <option value="NR">Nauru</option>
+                                        <option value="NP">Nepal</option>
+                                        <option value="NI">Nicaragua</option>
+                                        <option value="NE">Níger</option>
+                                        <option value="NG">Nigeria</option>
+                                        <option value="NU">Niue</option>
+                                        <option value="NF">Norfolk</option>
+                                        <option value="NO">Noruega</option>
+                                        <option value="NC">Nueva Caledonia</option>
+                                        <option value="NZ">Nueva Zelanda</option>
+                                        <option value="OM">Omán</option>
+                                        <option value="NL">Países Bajos</option>
+                                        <option value="PA">Panamá</option>
+                                        <option value="PG">Papúa Nueva Guinea</option>
+                                        <option value="PK">Paquistán</option>
+                                        <option value="PY">Paraguay</option>
+                                        <option value="PE">Perú</option>
+                                        <option value="PN">Pitcairn</option>
+                                        <option value="PF">Polinesia Francesa</option>
+                                        <option value="PL">Polonia</option>
+                                        <option value="PT">Portugal</option>
+                                        <option value="PR">Puerto Rico</option>
+                                        <option value="QA">Qatar</option>
+                                        <option value="UK">Reino Unido</option>
+                                        <option value="CF">República Centroafricana</option>
+                                        <option value="CZ">República Checa</option>
+                                        <option value="ZA">República de Sudáfrica</option>
+                                        <option value="DO">República Dominicana</option>
+                                        <option value="SK">República Eslovaca</option>
+                                        <option value="RE">Reunión</option>
+                                        <option value="RW">Ruanda</option>
+                                        <option value="RO">Rumania</option>
+                                        <option value="RU">Rusia</option>
+                                        <option value="EH">Sahara Occidental</option>
+                                        <option value="KN">Saint Kitts y Nevis</option>
+                                        <option value="WS">Samoa</option>
+                                        <option value="AS">Samoa Americana</option>
+                                        <option value="SM">San Marino</option>
+                                        <option value="VC">San Vicente y Granadinas</option>
+                                        <option value="SH">Santa Helena</option>
+                                        <option value="LC">Santa Lucía</option>
+                                        <option value="ST">Santo Tomé y Príncipe</option>
+                                        <option value="SN">Senegal</option>
+                                        <option value="SC">Seychelles</option>
+                                        <option value="SL">Sierra Leona</option>
+                                        <option value="SG">Singapur</option>
+                                        <option value="SY">Siria</option>
+                                        <option value="SO">Somalia</option>
+                                        <option value="LK">Sri Lanka</option>
+                                        <option value="PM">St Pierre y Miquelon</option>
+                                        <option value="SZ">Suazilandia</option>
+                                        <option value="SD">Sudán</option>
+                                        <option value="SE">Suecia</option>
+                                        <option value="CH">Suiza</option>
+                                        <option value="SR">Surinam</option>
+                                        <option value="TH">Tailandia</option>
+                                        <option value="TW">Taiwán</option>
+                                        <option value="TZ">Tanzania</option>
+                                        <option value="TJ">Tayikistán</option>
+                                        <option value="TF">Territorios franceses del Sur</option>
+                                        <option value="TP">Timor Oriental</option>
+                                        <option value="TG">Togo</option>
+                                        <option value="TO">Tonga</option>
+                                        <option value="TT">Trinidad y Tobago</option>
+                                        <option value="TN">Túnez</option>
+                                        <option value="TM">Turkmenistán</option>
+                                        <option value="TR">Turquía</option>
+                                        <option value="TV">Tuvalu</option>
+                                        <option value="UA">Ucrania</option>
+                                        <option value="UG">Uganda</option>
+                                        <option value="UY">Uruguay</option>
+                                        <option value="UZ">Uzbekistán</option>
+                                        <option value="VU">Vanuatu</option>
+                                        <option value="VE">Venezuela</option>
+                                        <option value="VN">Vietnam</option>
+                                        <option value="YE">Yemen</option>
+                                        <option value="YU">Yugoslavia</option>
+                                        <option value="ZM">Zambia</option>
+                                        <option value="ZW">Zimbabue</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label><%= (idioma == 'en') ? 'App Language' : 'Idioma de la App' %></label>
+                                <div class="selector">
+                                    <select class="wide add_bottom_15" name="idioma" id="idioma">
+                                        <option value="en" <%= (idioma=="en") ? "selected" : "" %>>Inglés</option>
+                                        <option value="es" <%= (idioma=="es") ? "selected" : "" %>>Español</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <h3 id="ficha-medica"><%= (idioma == 'en') ? 'Medical record' : 'Ficha Médica' %></h3>
+                            <p><%= (idioma == 'en') ? 'It is important that you complete your medical file so that in an emergency we can assist you safely' : 'Es importante que completes tu ficha médica para que ante una emergencia podamos asistirte de manera segura' %></p>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label><%= (idioma == 'en') ? 'Gender' : 'Sexo' %></label>
+                                <div class="selector">
+                                    <select class="wide add_bottom_15" name="sexo" id="sexo">
+                                        <option value="" selected><%= (idioma == 'en') ? 'Gender' : 'Sexo' %></option>
+                                        <option value="Masculino" <%= (usuario.sexo=="Masculino") ? "selected" : "" %>><%= (idioma == 'en') ? 'Male' : 'Masculino' %></option>
+                                        <option value="Femenino" <%= (usuario.sexo=="Femenino") ? "selected" : "" %>><%= (idioma == 'en') ? 'Female' : 'Femenino' %></option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label><%= (idioma == 'en') ? 'Age' : 'Edad' %></label>
+                                <input type="number" class="form-control" id="edad" name="edad" value="<%= usuario.edad %>">
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label><%= (idioma == 'en') ? 'Height' : 'Estatura' %> (cm)</label>
+                                <input type="number" class="form-control" id="estatura" name="estatura" value="<%= usuario.estatura %>">
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label><%= (idioma == 'en') ? 'Weight' : 'Peso' %> (kg)</label>
+                                <input type="number" class="form-control" id="peso" name="peso" value="<%= usuario.peso %>">
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label><%= (idioma == 'en') ? 'Blood type' : 'Grupo Sanguíneo' %></label>
+                                <div class="selector">
+                                    <select class="wide add_bottom_15" name="factor_sanguineo" id="factor_sanguineo">
+                                        <option value="">Elegir Grupo y Factor</option>
+                                        <option value="0-" <%= (usuario.factor_sanguineo=="0-") ? "selected" : "" %>>0-</option>
+                                        <option value="0+" <%= (usuario.factor_sanguineo=="0+") ? "selected" : "" %>>0+</option>
+                                        <option value="a-" <%= (usuario.factor_sanguineo=="a-") ? "selected" : "" %>>A-</option>
+                                        <option value="a+" <%= (usuario.factor_sanguineo=="a+") ? "selected" : "" %>>A+</option>
+                                        <option value="b-" <%= (usuario.factor_sanguineo=="b-") ? "selected" : "" %>>B-</option>
+                                        <option value="b+" <%= (usuario.factor_sanguineo=="b+") ? "selected" : "" %>>B+</option>
+                                        <option value="ab-" <%= (usuario.factor_sanguineo=="ab-") ? "selected" : "" %>>AB-</option>
+                                        <option value="ab+" <%= (usuario.factor_sanguineo=="ab+") ? "selected" : "" %>>AB+</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label><%= (idioma == 'en') ? 'Diseases' : 'Alergias' %></label>
+                                <input type="text" class="form-control" id="alergias" name="alergias" value="<%= usuario.alergias %>">
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label><%= (idioma == 'en') ? 'Allergies' : 'Enfermedades' %></label>
+                                <input type="text" class="form-control" id="enfermedades" name="enfermedades" value="<%= usuario.enfermedades %>">
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <hr>
+                            <div class="form-group">
+                                <label><%= (idioma == 'en') ? 'Emergency Email' : 'Email de Emergencia' %></label>
+                                <input type="email" class="form-control" id="contacto_emergencia" name="contacto_emergencia" value="<%= usuario.contacto_emergencia %>">
+                            </div>
+                            <p class="align-center"><%= (idioma == 'en') ? 'Enter a contact email in case of emergencies' : 'Introduce un mail de contacto en caso de emergencias' %></p>
+                        </div>
+                        <div class="col-sm-6"></div>
+                        <div class="col-sm-6">
+                            <div id="pass-info" class="clearfix"></div>
+                            <button id="btn_updt_ficha" class="btn_1 rounded full-width add_top_30"><%= (idioma == 'en') ? 'Save Changes' : 'Guardar Cambios' %>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</script>
+<script type="text/template" id="puntos_lista">
+    <div id="wrapper_pi" class="container margin_80_55">
+        <div id="mapa" class="map map_single"></div>
+        <div class="main_title_2">
+            <h3><%= (idioma == 'en') ? 'Discover Teguise&#39;s points of interest' : 'Descubre los puntos de interés de Teguise' %></h3>
+            <p><%= (idioma == 'en') ? 'Locate them on the map, find out, go to them, and share your photos' : 'Ubícalos en el mapa, infórmate, dirígete a ellos, y comparte tus fotos' %></p>
+        </div>
+        <div class="filters_listing sticky_horizontal filters_puntos">
+            <div class="container">
+                <ul class="clearfix" style="margin: 0px !important; text-align: center;">
+                    <li style="display: inline-block; float: none !important;">
+                        <div class="switch-field">
+                            <input type="radio" id="todospi" name="listing_filter" value="todospi" checked data-filter=".todospi" class="selected">
+                            <label for="todospi"><i class="icon-th-3"></i><%= (idioma == 'en') ? 'All' : 'Todos' %></label>
+                            <input type="radio" id="que_ver" name="listing_filter" value="que_ver" data-filter=".que_ver">
+                            <label for="que_ver"><i class="icon-eye-1"></i><%= (idioma == 'en') ? 'What to see' : 'Qué ver' %></label>
+                            <input type="radio" id="que_hacer" name="listing_filter" value="que_hacer" data-filter=".que_hacer">
+                            <label for="que_hacer"><i class="icon-pitch"></i><%= (idioma == 'en') ? 'What to do' : 'Qué hacer' %></label>
+                        </div>
+                    </li>
+                </ul>
+                <div style="text-align: center;">
+                    <div class="col-sm-6" style="display: inline-block;">
+                        <div class="selector">
+                            <select class="wide" name="rutapl" id="rutapl" style="height: 35px; margin-bottom: 5px; margin-top: 5px;">
+                                <option value="todosruta" selected><%= (idioma == 'en') ? 'All trails' : 'Todos los senderos' %></option>
+                                <% _.each(rutas_pdi, function(ruta){ %>
+                                    <option value="ruta<%= ruta.id %>"><%= (idioma=="es") ? ruta.nombre_es : ruta.nombre_en %></option>
+                                <% }) %>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="isotope-wrapper-pi">
+            <div class="row">
+                <% _.each(puntos_interes, function(punto){ %>
+                    <div class="col-lg-6 pi isotope-item todospi todosruta <%= punto.tipo %> ruta<%= punto.ruta_id %>">
+                        <a class="box_news" href="<%= punto.url %>" target="_blank">
+                            <figure>
+                                <% if (punto.archivo != null) { %>
+                                    <img src="<%= BASE_URL + '/cdn/uploads/' + punto.archivo.path_source %>" alt="">
+                                <% } %>
+                                <figcaption>
+                                    <strong class="<%= (punto.tipo == 'que_ver') ? 'icon-eye-1' : 'icon-pitch' %> categoria-punto"></strong>
+                                </figcaption>
+                            </figure>
+                            <h4><%= (idioma == 'en') ? punto.nombre_en : punto.nombre_es %></h4>
+                        </a>
+                        <p><%= (idioma == 'en') ? punto.desc_en : punto.desc_es %></p>
+                    </div>
+                <% }) %>
+            </div>
+        </div>
+    </div>
+</script>
+<script type="text/template" id="pis_content">
+    <% if (pis_data.length > 0) { %>
+        <div id="wrapper_spi" class="container margin_80_55">
+            <div class="filters_listing_s sticky_horizontal_s filters_puntos_s">
+                <div class="container">
+                    <ul class="clearfix" style="margin: 0px !important;">
+                        <li>
+                            <div class="switch-field">
+                                <input type="radio" id="todospis" name="listing_filter" value="todospis" checked data-filter=".todospis" class="selected">
+                                <label for="todospis"><i class="icon-th-3"></i><%= (idioma == 'en') ? 'All' : 'Todos' %></label>
+                                <input type="radio" id="que_vers" name="listing_filter" value="que_vers" data-filter=".que_vers">
+                                <label for="que_vers"><i class="icon-eye-1"></i><%= (idioma == 'en') ? 'What to see' : 'Qué ver' %></label>
+                                <input type="radio" id="que_hacers" name="listing_filter" value="que_hacers" data-filter=".que_hacers">
+                                <label for="que_hacers"><i class="icon-pitch"></i><%= (idioma == 'en') ? 'What to do' : 'Qué hacer' %></label>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="isotope-wrapper-spi">
+                <div class="row">
+                    <% _.each(pis_data, function(item){ %>
+                    <div class="col-lg-6 pi <%= item.tipo %>s todospis isotope-item-s">
+                        <a class="box_news" href="<%= item.url %>" target="_blank">
+                            <figure>
+                                <% if (item.archivo != null) { %>
+                                    <img src="<%= BASE_URL + '/cdn/uploads/' + item.archivo.path_source %>" alt="">
+                                <% } %>
+                                <figcaption>
+                                    <strong class="<%= (item.tipo == 'que_ver') ? 'icon-eye-1' : 'icon-pitch' %> categoria-punto"></strong>
+                                </figcaption>
+                            </figure>
+                            <h4><%= (idioma == 'en') ? item.nombre_en : item.nombre_es %></h4>
+                        </a>
+                        <p><%= (idioma == 'en') ? item.desc_en : item.desc_es %></p>
+                    </div>
+                    <% }) %>
+                </div>
+            </div>
+        </div>
+    <% } else { %>
+        <div class="container margin_80_55 bg_color_1" style="padding-top: 45px;">
+            <span style="display: block;text-align: center;"><%= (idioma == 'en') ? 'The trail has no points of interest' : 'El sendero no tiene puntos de interés' %></span>
+        </div>
+    <% } %>
+</script>
+<script type="text/template" id="leave_review">
+    <div class="container margin_60_35">
+        <div class="row">
+            <div class="col">
+                <h5><%= (idioma == 'en') ? 'Share your Images' : '¿Quieres compartir imágenes?' %></h5>
+                <div>
+                    <button id="btn_upld_img" style="margin-top: 20px;" class="btn_1"><%= (idioma == 'en') ? 'Attach Image' : 'Adjuntar Imagen' %></button>
+                    <div class="subiendo"><i class="icon-spin3 animate-spin"></i></div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <div class="add-review">
+                    <h5><%= (idioma == 'en') ? 'Comment this Trail' : 'Comenta este Sendero' %></h5>
+                    <form>
+                        <div class="row">
+                            <div class="form-group col-md-6">
+                                <label><%= (idioma == 'en') ? 'Assessment' : 'Valoración' %></label>
+                                <div class="selector">
+                                    <select name="rating_review" id="rating_review" class="wide">
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                        <option value="4">4</option>
+                                        <option value="5" selected>5</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group col-md-12">
+                                <label><%= (idioma == 'en') ? 'Commentary' : 'Comentario' %></label>
+                                <textarea name="review_text" id="review_text" class="form-control" style="height:130px;"></textarea>
+                            </div>
+                            <div class="form-group col-md-12 add_top_20">
+                                <button type="button" id="submit_review" class="btn_1"><%= (idioma == 'en') ? 'Comment' : 'Comentar' %></button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</script>
+<script type="text/template" id="detalle_reviews">
+    <% if (ruta_actual.valoraciones.length > 0) { %>
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <div class="reviews-container">
+                        <h4><%= (idioma == 'en') ? 'Comments' : 'Comentarios' %></h4>
+                        <div class="review-box clearfix">
+                            <% _.each(ruta_actual.valoraciones, function(val) { %>
+                                <div class="rev-content">
+                                    <figure class="rev-thumb">
+                                        <img src="<%= (!val.usuario.avatar) ? BASE_URL + '/img/demo/avatar_default.jpg' : BASE_URL + '/cdn/uploads/'+val.usuario.avatar %>" alt="">
+                                    </figure>
+                                    <div class="rating"><%=restrellitas(val.valor)%></div>
+                                    <div class="rev-info"><%= val.created_at %></div>
+                                    <div class="rev-text"><p><%= val.comentario %></p></div>
+                                </div>
+                            <% }) %>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <% } %>
+</script>
+<script type="text/template" id="tpl_acerca">
+    <section class="hero_in acerca-de-header">
+        <div class="wrapper">
+            <div class="container">
+                <h1 class="fadeInUp"><span></span><%= (idioma == 'en') ? 'About Ecotur' : 'Acerca de Ecotur' %></h1>
+            </div>
+        </div>
+    </section>
+    <div class="bg_color_1">
+        <div class="container margin_80_55">
+            <div class="main_title_2"></div>
+            <div>
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div style="position: relative; display: block; text-align: center; margin-bottom: 30px;">
+                            <figure>
+                                <img style="width: 60%;" src="img/logo_ecotur_sticky.png" alt="ecoTUR teguise">
+                            </figure>
+                        </div>
+                        <p class="acerca-de"><%= (idioma == 'en') ? 'Project funded by the MAC 2014-2020 and whose purpose is to create a transnational network of municipalities for the co-production of a strategy for the enhancement of the natural and ethnographic heritage through the promotion of ecotourism and active tourism through trails of ecotourism that run through different environments.' : 'Proyecto financiado por el MAC 2014-2020 y cuya finalidad es la de crear una red transnacional de municipios para la co-producción de una estrategia para la puesta en valor del patrimonio natural y etnográfico a través del fomento del ecoturismo y turismo activo mediante senderos de ecoturismo que discurren por diferentes entornos.' %></p>
+                    </div>
+                    <div class="col-lg-6">
+                        <div style="position: relative; display: block; text-align: center; margin-bottom: 30px;">
+                            <figure><img style="width: 75%;" src="img/fedr.png" alt="Interreg"></figure>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div style="position: relative; display: block; text-align: center; margin-bottom: 30px;">
+                            <figure><img style="width: 55%;" src="img/logo-mac.png" alt="MAC 2014-2020"></figure>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div style="position: relative; display: block; text-align: center; margin-bottom: 30px;">
+                            <figure><img style="width: 30%;" src="img/medio-ambiente.jpg" alt="Medio Ambiente"></figure>
+                        </div>
+                    </div>
+                    <div id="accordion" style="width: 100%;">
+                        <div class="card card-descripcion card-socios">
+                            <div class="card-header" id="headingOne">
+                                <h5 class="mb-0">
+                                    <button class="btn btn-link collapsed btn-socios" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                        <%= (idioma == 'en') ? 'Project Partners' : 'Socios del Proyecto' %>
+                                    </button>
+                                </h5>
+                            </div>
+                            <div id="collapseOne" class="collapse container" aria-labelledby="headingOne" data-parent="#accordion">
+                                <div class="card-body row">
+                                    <div class="col">
+                                        <a href="http://www.turismoteguise.com/es/index.php"><img src="img/logos-socios/logos-socios-footer-1.png" style="max-height: 65%;"></a>
+                                    </div>
+                                    <div class="col">
+                                        <a href="http://visitcorralejo.com/"><img src="img/logos-socios/logos-socios-footer-2.png" style="max-height: 65%;"></a>
+                                    </div>
+                                    <div class="col">
+                                        <a href="https://turismo.mogan.es/es"><img src="img/logos-socios/logos-socios-footer-3.png" style="max-height: 65%;"></a>
+                                    </div>
+                                    <div class="col">
+                                        <a href="http://www.aridane.org/index/index.php"><img src="img/logos-socios/logos-socios-footer-4.png" style="max-height: 65%;"></a>
+                                    </div>
+                                    <div class="col">
+                                        <a href="https://www.ecotursantiagodelteide.org/"><img src="img/logos-socios/logos-socios-footer-5.png" style="max-height: 80%;"></a>
+                                    </div>
+                                    <div class="col">
+                                        <a href="http://www.observatorioelhierro.es/"><img src="img/logos-socios/logos-socios-footer-6.png" style="max-height: 80%;"></a>
+                                    </div>
+                                    <div class="col">
+                                        <a href="http://vallehermosoweb.es/"><img src="img/logos-socios/logos-socios-footer-7.png" style="max-height:90%;"></a>
+                                    </div>
+                                    <div class="col">
+                                        <a href="http://www.visitpontadelgada.pt"><img src="img/logos-socios/logos-socios-footer-8.png" style="max-height: 65%;"></a>
+                                    </div>
+                                    <div class="col">
+                                        <a href="https://angradoheroismo.pt/projetos-cofinanciados-city-2020/"><img src="img/logos-socios/logos-socios-footer-9.png"></a>
+                                    </div>
+                                    <div class="col">
+                                        <img src="img/logos-socios/logos-socios-footer-10.png">
+                                    </div>
+                                    <div class="col">
+                                        <a href="http://cm-lajesdopico.pt/"><img src="img/logos-socios/logos-socios-footer-11.png" style="max-height:90%;"></a>
+                                    </div>
+                                    <div class="col">
+                                        <a href="https://www.portomoniz.pt/pt/"><img src="img/logos-socios/logos-socios-footer-13.png" style="max-height:90%;"></a>
+                                    </div>
+                                    <div class="col">
+                                        <img src="img/logos-socios/logos-socios-footer-14.png" style="max-height:90%;">
+                                    </div>
+                                    <div class="col">
+                                        <a href="https://visitsantoantao.net/"><img src="img/logos-socios/logos-socios-footer-15.png" style="max-height:90%;"></a>
+                                    </div>
+                                    <div class="col">
+                                        <img src="img/logos-socios/logos-socios-footer-16.png" style="max-height:90%;">
+                                    </div>
+                                    <div class="col">
+                                        <img src="img/logos-socios/logos-socios-footer-17.png" style="max-height:90%;">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</script>
+<script type="text/template" id="tpl_consejos">
+    <section class="hero_in consejo-header">
+        <div class="wrapper">
+            <div class="container">
+                <h1 class="fadeInUp"><span></span><%= (idioma == 'en') ? 'Route signage' : 'Señalización del recorrido' %></h1>
+            </div>
+        </div>
+    </section>
+    <div class="bg_color_1">
+        <div class="container margin_80_55">
+            <div class="main_title_2">
+                <span><em></em></span>
+                <br>
+                <p><%= (idioma == 'en') ? '' : '' %><br/><%= (idioma == 'en') ? 'Follow the advice not to get lost in the tour' : 'Sigue esta señalización para no perderte en el recorrido' %></p>
+            </div>
+            <div class="isotope-wrapper">
+                <div class="row" style="display: inline-block; text-align: center; width: 100%;">
+                    <div class="col-lg-6 isotope-item bienvenido-container" style="display: inline-block;">
+                        <img src="img/senalizacion_de_senderos.jpg" alt="<%= (idioma == 'en') ? 'Tips for walkers' : 'Consejos para senderistas' %>" style="width:100%;">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</script>
+<script type="text/template" id="tpl_recomendaciones">
+    <section class="hero_in recomendaciones-header">
+        <div class="wrapper">
+            <div class="container">
+                <h1 class="fadeInUp"><span></span><%= (idioma == 'en') ? 'Recommendations' : 'Recomendaciones' %></h1>
+            </div>
+        </div>
+    </section>
+    <div class="bg_color_1">
+        <div class="container margin_80_55">
+            <div class="main_title_2">
+                <span><em></em></span>
+                <br>
+                <p><%= (idioma == 'en') ? '' : '' %><br/><%= (idioma == 'en') ? 'Hiking is a sporting activity that allows you to enjoy the outdoors and natural places, being able to perform at different levels of difficulty.' : 'El senderismo es una actividad deportiva que te permite disfrutar del aire libre y de lugares naturales, pudiendo realizarse en distintos niveles de dificultad.' %><br><br><%= (idioma == 'en') ? 'To do this you have to follow certain fundamental recommendations to do it safely.' : 'Para ello tienes que seguir ciertas recomendaciones fundamentales para hacerlo de manera segura.' %></p>
+            </div>
+            <div class="isotope-wrapper">
+                <div class="row" style="display: inline-block; text-align: center; width: 100%;">
+                    <div class="col-lg-6 isotope-item bienvenido-container" style="display: inline-block;">
+                        <img src="img/iconos-recomendaciones/icono-1.png" alt="<%= (idioma == 'en') ? 'Recommendations 1' : 'Recomendaciones 1' %>" style="width:40%;">
+                        <p style="color:#02a2e6;"><%= (idioma == 'en') ? 'Hiking should' : 'El senderismo siempre' %><br><%= (idioma == 'en') ? 'always be accompanied' : 'se debe practicar acompañado' %></p>
+                        <hr style="border:1px dotted grey; width:100%;" />
+                        <img src="img/iconos-recomendaciones/icono-2.png" alt="<%= (idioma == 'en') ? 'Recommendations 2' : 'Recomendaciones 2' %>" style="width:40%;">
+                        <p style="color:#02a2e6;"><%= (idioma == 'en') ? 'Always check' : 'Consulta siempre' %><br><%= (idioma == 'en') ? 'the weather of the trail' : 'la meteorología del sendero' %></p>
+                        <hr style="border:1px dotted grey; width:100%;" />
+                        <img src="img/iconos-recomendaciones/icono-3.png" alt="<%= (idioma == 'en') ? 'Recommendations 3' : 'Recomendaciones 3' %>" style="width:40%;">
+                        <p style="color:#02a2e6;"><%= (idioma == 'en') ? 'Wear appropriate footwear' : 'Lleva calzado y ropa' %><br><%= (idioma == 'en') ? 'and clothing for walking' : 'adecuados para caminar' %></p>
+                        <hr style="border:1px dotted grey; width:100%;" />
+                        <img src="img/iconos-recomendaciones/icono-4.png" alt="<%= (idioma == 'en') ? 'Recommendations 4' : 'Recomendaciones 4' %>" style="width:40%;">
+                        <p style="color:#02a2e6;"><%= (idioma == 'en') ? 'Protect yourself from the sun with goggles and glasses' : 'Protégete del sol con protector y gafas' %></p>
+                        <hr style="border:1px dotted grey; width:100%;" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</script>
+
+<!-- CORDOVA -->
+<script src="cordova.js"></script>
+<!-- COMMON SCRIPTS -->
+<script src="js/variables.js"></script>
+<script src="js/paises.js"></script>
+<script src="vendor/panagea-1.1.0/js/jquery-2.2.4.min.js"></script>
+<script src="vendor/panagea-1.1.0/js/common_scripts.js"></script>
+<script src="vendor/panagea-1.1.0/js/moment.min.js"></script>
+<script src="vendor/panagea-1.1.0/assets/validate.js"></script>
+<script src="vendor/dropzone/dropzone.js"></script>
+<script src="vendor/imagesloaded-4.1.4/imagesloaded.pkgd.min.js"></script>
+<script src="vendor/masonry-4.2.2/masonry.pkgd.min.js"></script>
+<script src="vendor/panagea-1.1.0/js/isotope.min.js"></script>
+<script src="vendor/swipebox-1.4.4/js/jquery.swipebox.min.js"></script>
+
+
+<script src="vendor/lightslider-1.1.6/js/lightslider.min.js"></script>
+
+<script src="vendor/lightgallery-1.6.12/js/lightgallery.min.js"></script>
+<script src="vendor/lightgallery-1.6.12/js/plugins/lg-thumbnail.min.js"></script>
+<script src="vendor/lightgallery-1.6.12/js/plugins/lg-fullscreen.min.js"></script>
+
+
+
+
+<script src="vendor/swal/sweetalert2.min.js"></script>
+<script src="vendor/underscorejs-1.9.1/underscore-min.js"></script>
+<script src="vendor/backbone-1.3.3/backbone-min.js"></script>
+<script src="vendor/backbone-fetch-cache-1.4.1/backbone.fetch-cache.js"></script>
+<script src="vendor/openfb/openfb.js" type="text/javascript"></script>
+<script src="js/helpers.js"></script>
+<script src="js/bbsync.js"></script>
+<script src="js/componentes/ruta.js"></script>
+<script src="js/componentes/usuario.js"></script>
+<script src="js/componentes/favorita.js"></script>
+<script src="js/router.js"></script>
+<script src="js/mapa.js"></script>
+<script src="js/gps.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>

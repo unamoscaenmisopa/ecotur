@@ -1,0 +1,76 @@
+<?xml version='1.0' encoding='utf-8'?>
+<widget id="com.healthink.ecotur" version="1.2.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+    <name>ECOTur Teguise</name>
+    <description>
+        ECOTur Teguise
+    </description>
+    <author email="info@unamoscaenmisopa.com" href="https://www.unamoscaenmisopa.com">
+        Healthink Team
+    </author>
+    <content src="index.html" />
+    <access origin="*" />
+    <allow-intent href="http://*/*" />
+    <allow-intent href="https://*/*" />
+    <allow-intent href="tel:*" />
+    <allow-intent href="sms:*" />
+    <allow-intent href="mailto:*" />
+    <allow-intent href="geo:*" />
+    <platform name="android">
+        <allow-intent href="market:*" />
+        <splash src="res/screen/android/ecotur.png" />
+    </platform>
+    <platform name="ios">
+        <allow-intent href="itms:*" />
+        <allow-intent href="itms-apps:*" />
+        <icon height="180" src="res/icon/ios/ecotur180.png" width="180" />
+        <icon height="120" src="res/icon/ios/ecotur120.png" width="120" />
+        <icon height="76" src="res/icon/ios/ecotur76.png" width="76" />
+        <icon height="152" src="res/icon/ios/ecotur152.png" width="152" />
+        <icon height="167" src="res/icon/ios/ecotur167.png" width="167" />
+        <icon height="40" src="res/icon/ios/ecotur-40.png" width="40" />
+        <icon height="167" src="res/icon/ios/ecotur167.png" width="167" />
+        <icon height="1024" src="res/icon/ios/ecotur1024.png" width="1024" />
+        <preference name="Fullscreen" value="true" />
+        <splash src="res/screen/ios/Default@2x~universal~anyany.png" />
+        <edit-config file="*-Info.plist" mode="merge" target="NSLocationWhenInUseUsageDescription">
+            <string>Necesitamos saber su posición para mostrarle los senderos</string>
+        </edit-config>
+        <edit-config file="*-Info.plist" mode="merge" target="NSCameraUsageDescription">
+            <string>Necesitamos acceso a la cámara para compartirnos tus fotos en los senderos</string>
+        </edit-config>
+        <edit-config file="*-Info.plist" mode="merge" target="NSPhotoLibraryUsageDescription">
+            <string>Necesitamos acceso a tu librería para compartirnos tus fotos en los senderos</string>
+        </edit-config>
+        <edit-config file="*-Info.plist" mode="merge" target="NSPhotoLibraryAddUsageDescription">
+            <string>Necesitamos acceso a tu librería para agregar fotos de los senderos</string>
+        </edit-config>
+        <edit-config file="*-Info.plist" mode="merge" target="UIStatusBarHidden">
+            <true />
+        </edit-config>
+        <edit-config file="*-Info.plist" mode="merge" target="UIViewControllerBasedStatusBarAppearance">
+            <false />
+        </edit-config>
+        <edit-config file="*-Info.plist" mode="merge" target="NSCameraUsageDescription">
+            <string>Necesitamos acceso a la cámara para poder realizar fotos</string>
+        </edit-config>
+        <edit-config file="*-Info.plist" mode="merge" target="NSPhotoLibraryUsageDescription">
+            <string>Necesitamos acceso a tu librería de fotos para agregar fotos de los senderos</string>
+        </edit-config>
+        <edit-config file="*-Info.plist" mode="merge" target="NSLocationWhenInUseUsageDescription">
+            <string>Necesitamos acceso a tu localización</string>
+        </edit-config>
+        <edit-config file="*-Info.plist" mode="merge" target="NSPhotoLibraryAddUsageDescription">
+            <string>Necesitamos acceso a tu librería de fotos para guardar fotos</string>
+        </edit-config>
+    </platform>
+    <icon src="res/icon/ecotour-logo-500x500.png" />
+    <plugin name="cordova-plugin-whitelist" spec="1" />
+    <plugin name="cordova-plugin-device" spec="^2.0.2" />
+    <plugin name="cordova-plugin-geolocation" spec="^4.0.1" />
+    <plugin name="cordova-plugin-dialogs" spec="^2.0.1" />
+    <plugin name="cordova-plugin-inappbrowser" spec="^3.0.0" />
+    <plugin name="cordova-plugin-x-socialsharing" spec="^5.4.1" />
+    <plugin name="cordova-plugin-camera" spec="^4.0.3" />
+    <plugin name="cordova-plugin-splashscreen" spec="^5.0.2" />
+    <plugin name="cordova-plugin-file-transfer" spec="^1.7.1" />
+</widget>

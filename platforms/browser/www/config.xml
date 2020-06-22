@@ -1,0 +1,19 @@
+<?xml version='1.0' encoding='utf-8'?>
+<widget id="com.healthink.ecotur" version="1.2.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+    <name>ECOTur Teguise</name>
+    <description>
+        ECOTur Teguise
+    </description>
+    <author email="info@unamoscaenmisopa.com" href="https://www.unamoscaenmisopa.com">
+        Healthink Team
+    </author>
+    <content src="index.html" />
+    <access origin="*" />
+    <allow-intent href="http://*/*" />
+    <allow-intent href="https://*/*" />
+    <allow-intent href="tel:*" />
+    <allow-intent href="sms:*" />
+    <allow-intent href="mailto:*" />
+    <allow-intent href="geo:*" />
+    <icon src="res/icon/ecotour-logo-500x500.png" />
+</widget>
