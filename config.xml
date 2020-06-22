@@ -1,10 +1,10 @@
 <?xml version='1.0' encoding='utf-8'?>
 <widget id="com.healthink.ecotur" version="1.2.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
-    <name>ECOTur Teguise</name>
+    <name>ECO-TUR Teguise</name>
     <description>
-        ECOTur Teguise
+        ECO-TUR Teguise
     </description>
-    <author email="info@unamoscaenmisopa.com" href="https://www.unamoscaenmisopa.com">
+    <author email="ppulella@healthink.es" href="https://www.healthink.es">
         Healthink Team
     </author>
     <content src="index.html" />
